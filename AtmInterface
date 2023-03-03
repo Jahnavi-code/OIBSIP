@@ -1,0 +1,149 @@
+import java.util.*;
+class Atm
+{
+    public static HashMap<Integer,ArrayList<String>>cust=new HashMap<Integer,ArrayList<String>>();
+    public static ArrayList<ArrayList<String>>transaction=new ArrayList<ArrayList<String>>();
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        while(true){
+            System.out.println("Enter Your Choice:\n1.CustomerLogin\n2.Exit ");
+            int n=sc.nextInt();
+            switch(n)
+            {
+                case 1:CustomerLogin();break;
+                case 2:System.exit(0);break;
+                default:System.out.println("Enter Valid Choice");
+            }
+        }
+    }
+    public static void CustomerLogin() {
+        ArrayList<String> info=new ArrayList<>();
+        info.add("2396");
+        info.add("Sravika");
+        info.add("200000");
+        cust.put(29163, info);
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Your Credit Card Number");
+        int num=sc.nextInt();
+        System.out.println("Enter Your Pin");
+        int pin=sc.nextInt();
+        String pin1=String.valueOf(pin);
+        if(cust.containsKey(num))
+        {
+            if(pin1.equals((cust.get(num).get(0))))
+            {
+                System.out.println("Welcome User "+(cust.get(num).get(1)));
+                Transaction(num);
+            }
+            else
+            {
+                System.out.println("Enter Valid Pin Number");
+            }
+        }
+        else
+            System.out.println("Enter Valid Card Number");
+    }
+    public static void Transaction(int num) {
+        Scanner sc=new Scanner(System.in);
+        while(true)
+        {
+            System.out.println("Enter Choice:\n---------------------------\n1.Check Balance\n2.WithDraw\n3.Deposit\n4.Transfer\n5.Mini Statement\n6.Exit\n---------------------------");
+            int n=sc.nextInt();
+            switch(n)
+            {
+                case 1:enquiry(num);break;
+                case 2:CashWithDraw(num);break;
+                case 3:Deposit(num);break;
+                case 4:Transfer(num);break;
+                case 5:Statement(num);break;
+                case 6:System.out.println("Thank you. Please visit again");
+                    System.exit(0);break;
+                default:System.out.println("Enter Correct Choice");
+            }
+        }
+    }
+    public static void enquiry(int num) {
+        System.out.println("Current Balance is: "+cust.get(num).get(2));
+    }
+    public static void CashWithDraw(int num) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Amount:");
+        int cash=sc.nextInt();
+        if(cash<=Integer.parseInt(cust.get(num).get(2))){
+            System.out.println("Your Amount is processing....");
+            System.out.println("Your Amount is Debited");
+            String amount=cust.get(num).get(2);
+            int amount1=Integer.parseInt(amount);
+            amount1-=cash;
+            amount=String.valueOf(amount1);
+            ArrayList<String> info=cust.get(num);
+            info.set(2, amount);
+            cust.put(num,info);
+            ArrayList<String> transactionDetails=new ArrayList<>();
+            transactionDetails.add(String.valueOf(num));
+            transactionDetails.add("With Draw");
+            transactionDetails.add(String.valueOf(cash));
+            transaction.add(transactionDetails);
+            System.out.println("Your Balance is: "+cust.get(num).get(2));
+        }
+        else{
+            System.out.println("You are running out of Balance");
+        }
+    }
+    public static void Deposit(int num) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Amount: ");
+        int cash=sc.nextInt();
+        System.out.println("Your Amount is Deposited");
+        String amount=cust.get(num).get(2);
+        int amount1=Integer.parseInt(amount);
+        amount1+=cash;
+        amount=String.valueOf(amount1);
+        ArrayList<String> info=cust.get(num);
+        info.set(2, amount);
+        cust.put(num,info);
+        ArrayList<String> transactionDetails=new ArrayList<>();
+        transactionDetails.add(String.valueOf(num));
+        transactionDetails.add("Deposit");
+        transactionDetails.add(String.valueOf(cash));
+        transaction.add(transactionDetails);
+        System.out.println("Your Current Balance is: "+cust.get(num).get(2));
+    }
+    public static void Statement(int num) {
+        for(ArrayList<String> i:transaction)
+        {
+            if(Integer.parseInt(i.get(0))==num){
+                for(String j:i){
+                    System.out.print(j+" ");
+                }
+                System.out.println();
+            }
+        }
+    }
+    public static void Transfer(int num){
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the Account Number to where, the money to be transfer ");
+        int acc1=sc.nextInt();
+        System.out.println("Enter Amount to Transfer ");
+        int cash=sc.nextInt();
+        if(cash<=Integer.parseInt(cust.get(num).get(2))){
+            System.out.println("Amount of Rs:"+cash+"Transfered to "+acc1);
+            String amount=cust.get(num).get(2);
+            int amount1=Integer.parseInt(amount);
+            amount1-=cash;
+            amount=String.valueOf(amount1);
+            ArrayList<String> info=cust.get(num);
+            info.set(2, amount);
+            cust.put(num,info);
+            ArrayList<String> transactionDetails=new ArrayList<>();
+            transactionDetails.add(String.valueOf(num));
+            transactionDetails.add("Transfer");
+            transactionDetails.add(String.valueOf(cash));
+            transaction.add(transactionDetails);
+            System.out.println("The Balance Amount: Rs:"+cust.get(num).get(2));
+        }
+        else{
+            System.out.println("Sorry Insufficent Balance.");
+        }
+    }
+}
