@@ -8,11 +8,11 @@ HashMap<String,Integer> hm = new HashMap<String,Integer>();
 		String Uname;
 		System.out.println("Enter UserName : ");
 		Uname = scobj.next();
-		int PWD;
+		int Pwd;
 		System.out.println("Enter Password : ");
-		PWD= scobj.nextInt();
+		Pwd= scobj.nextInt();
 		if(hm.containsKey(Uname)) {
-			if(hm.get(Uname)==PWD){
+			if(hm.get(Uname)==Pwd){
 				System.out.println("\n Welcome @ User");
 				Options_Menu();	}
 			else {
@@ -25,12 +25,12 @@ HashMap<String,Integer> hm = new HashMap<String,Integer>();
     
 	}
 	public void Options_Menu() {
-		int Choice;
+		int C;
 		System.out.println("===User Menu===");
 		System.out.println("1.Update Profile \n 2.Write Exam \n 3.Exit ");
 		System.out.println("Enter The Choice: ");
-		Choice = scobj.nextInt();
-		switch(Choice) {
+		C = scobj.nextInt();
+		switch(C) {
 		case 1:hm=Update_Details();
 			Options_Menu();break;
 		case 2:Examination();
@@ -62,47 +62,47 @@ public void Examination() {
 	long StartTime=System.currentTimeMillis();
 	long EndTime=StartTime+30;
 	int AnsweredQueries=0;
-	int UserAnswer,MarksSecured;
+	int Ans,MarksSecured;
 	System.out.println("Please Start Your Exam");
 	System.out.println("Examination Instructions: ");
 	System.out.println("You Have To Answer 5 Questions in 30 Seconds");
 	System.out.println("Each Question carries 10 marks and -5 for wrong answer");
 	HashMap<String,ArrayList<String>> queries=new HashMap<String,ArrayList<String>>();
-	ArrayList<String> Ques1=new ArrayList<String>();
-    Ques1.add("Procedural");
-	Ques1.add("Structural");
-	Ques1.add("Object-oriented");
-	Ques1.add("Markup");
-	Ques1.add("3");
-	queries.put("Java is which language",Ques1);
-	ArrayList<String> Ques2=new ArrayList<String>();
-	Ques2.add("exception");
-	Ques2.add("error");
-	Ques2.add("52 I");
-	Ques2.add("none");
-	Ques2.add("3");
-	queries.put("From this code snippet predict the output : int a=52; \n char c= \'I\'; \n System.out.print(a);\n System.out.print(c);",Ques2);
+	ArrayList<String> Q1=new ArrayList<String>();
+    	Q1.add("Procedural");
+	Q1.add("Structural");
+	Q1.add("Object-oriented");
+	Q1.add("Markup");
+	Q1.add("3");
+	queries.put("Java is which language",Q1);
+	ArrayList<String> Q2=new ArrayList<String>();
+	Q2.add("exception");
+	Q2.add("error");
+	Q2.add("52 I");
+	Q2.add("none");
+	Q2.add("3");
+	queries.put("From this code snippet predict the output : int a=52; \n char c= \'I\'; \n System.out.print(a);\n System.out.print(c);",Q2);
 	ArrayList<String> Ques3=new ArrayList<String>();
-	Ques3.add("data members");
-	Ques3.add("both a & c");
-	Ques3.add("member functions");
-	Ques3.add("objects");
-	Ques3.add("2");
-	queries.put("What does a class contains in java",Ques3);
+	Q3.add("data members");
+	Q3.add("both a & c");
+	Q3.add("member functions");
+	Q3.add("objects");
+	Q3.add("2");
+	queries.put("What does a class contains in java",Q3);
 	ArrayList<String> Ques4=new ArrayList<String>();
-	Ques4.add("At run time");
-	Ques4.add("At compile time");
-	Ques4.add("Depends on the code");
-	Ques4.add("none");
-	Ques4.add("1");
-	queries.put("When is the object created with new keyword?",Ques4);
-    ArrayList<String> Ques5=new ArrayList<String>();
-	Ques5.add("true");
-	Ques5.add("false");
-	Ques5.add("an int value");
-	Ques5.add("none");
-	Ques5.add("3");
-	queries.put("compareTo returns?",Ques5);
+	Q4.add("At run time");
+	Q4.add("At compile time");
+	Q4.add("Depends on the code");
+	Q4.add("none");
+	Q4.add("1");
+	queries.put("When is the object created with new keyword?",Q4);
+    	ArrayList<String> Ques5=new ArrayList<String>();
+	Q5.add("true");
+	Q5.add("false");
+	Q5.add("an int value");
+	Q5.add("none");
+	Q5.add("3");
+	queries.put("compareTo returns?",Q5);
 	int sno=0;
     Set<String> set=queries.keySet(); 
     ArrayList<String> al=new ArrayList<>(set);
@@ -112,9 +112,9 @@ public void Examination() {
 		System.out.println("\n\nQ."+(sno+1)+") "+i);
 		System.out.println("\n(1) "+queries.get(i).get(0)+"\t"+"(2) "+queries.get(i).get(1)+"\t"+"(3) "+queries.get(i).get(2)+"\t"+"(4) "+queries.get(i).get(3)+" ");
 		System.out.println("Enter Option");
-		UserAnswer=scobj.nextInt();
+		Ans=scobj.nextInt();
 		System.out.println("Your Answers Are Submited.....");
-		if(UserAnswer==Integer.parseInt(queries.get(i).get(4))) {
+		if(Ans==Integer.parseInt(queries.get(i).get(4))) {
 			AnsweredQueries++;
 		}
         sno++;
